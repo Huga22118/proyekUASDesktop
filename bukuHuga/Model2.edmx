@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="bukuModel2.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="aksesBuku">
+          <Key>
+            <PropertyRef Name="idBuku" />
+          </Key>
+          <Property Name="idBuku" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="namaBuku" Type="varchar(max)" Nullable="false" />
+          <Property Name="namaPenulis" Type="varchar(max)" Nullable="false" />
+          <Property Name="hargaBuku" Type="int" Nullable="false" />
+          <Property Name="stokBarang" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Transaksi">
+          <Key>
+            <PropertyRef Name="idTransaksi" />
+          </Key>
+          <Property Name="idTransaksi" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idBuku" Type="int" Nullable="false" />
+          <Property Name="jumlahBeli" Type="int" Nullable="false" />
+          <Property Name="totalHarga" Type="int" Nullable="false" />
+          <Property Name="tanggalTransaksi" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="userAkun">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Transaksi__idBuk__4BAC3F29">
+          <End Role="aksesBuku" Type="Self.aksesBuku" Multiplicity="1" />
+          <End Role="Transaksi" Type="Self.Transaksi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aksesBuku">
+              <PropertyRef Name="idBuku" />
+            </Principal>
+            <Dependent Role="Transaksi">
+              <PropertyRef Name="idBuku" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="bukuModel2StoreContainer">
+          <EntitySet Name="aksesBuku" EntityType="Self.aksesBuku" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transaksi" EntityType="Self.Transaksi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="userAkun" EntityType="Self.userAkun" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Transaksi__idBuk__4BAC3F29" Association="Self.FK__Transaksi__idBuk__4BAC3F29">
+            <End Role="aksesBuku" EntitySet="aksesBuku" />
+            <End Role="Transaksi" EntitySet="Transaksi" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="bukuModel2" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="aksesBuku">
+          <Key>
+            <PropertyRef Name="idBuku" />
+          </Key>
+          <Property Name="idBuku" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="namaBuku" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="namaPenulis" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="hargaBuku" Type="Int32" Nullable="false" />
+          <Property Name="stokBarang" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Transaksis" Relationship="bukuModel2.FK__Transaksi__idBuk__4BAC3F29" FromRole="aksesBuku" ToRole="Transaksi" />
+        </EntityType>
+        <EntityType Name="userAkun">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="bukuEntities3" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="aksesBukus" EntityType="Self.aksesBuku" />
+          <EntitySet Name="userAkuns" EntityType="Self.userAkun" />
+          <EntitySet Name="Transaksis" EntityType="bukuModel2.Transaksi" />
+          <AssociationSet Name="FK__Transaksi__idBuk__4BAC3F29" Association="bukuModel2.FK__Transaksi__idBuk__4BAC3F29">
+            <End Role="aksesBuku" EntitySet="aksesBukus" />
+            <End Role="Transaksi" EntitySet="Transaksis" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Transaksi">
+          <Key>
+            <PropertyRef Name="idTransaksi" />
+          </Key>
+          <Property Name="idTransaksi" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idBuku" Type="Int32" Nullable="false" />
+          <Property Name="jumlahBeli" Type="Int32" Nullable="false" />
+          <Property Name="totalHarga" Type="Int32" Nullable="false" />
+          <Property Name="tanggalTransaksi" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="aksesBuku" Relationship="bukuModel2.FK__Transaksi__idBuk__4BAC3F29" FromRole="Transaksi" ToRole="aksesBuku" />
+        </EntityType>
+        <Association Name="FK__Transaksi__idBuk__4BAC3F29">
+          <End Type="bukuModel2.aksesBuku" Role="aksesBuku" Multiplicity="1" />
+          <End Type="bukuModel2.Transaksi" Role="Transaksi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aksesBuku">
+              <PropertyRef Name="idBuku" />
+            </Principal>
+            <Dependent Role="Transaksi">
+              <PropertyRef Name="idBuku" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="bukuModel2StoreContainer" CdmEntityContainer="bukuEntities3">
+          <EntitySetMapping Name="aksesBukus">
+            <EntityTypeMapping TypeName="bukuModel2.aksesBuku">
+              <MappingFragment StoreEntitySet="aksesBuku">
+                <ScalarProperty Name="idBuku" ColumnName="idBuku" />
+                <ScalarProperty Name="namaBuku" ColumnName="namaBuku" />
+                <ScalarProperty Name="namaPenulis" ColumnName="namaPenulis" />
+                <ScalarProperty Name="hargaBuku" ColumnName="hargaBuku" />
+                <ScalarProperty Name="stokBarang" ColumnName="stokBarang" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="userAkuns">
+            <EntityTypeMapping TypeName="bukuModel2.userAkun">
+              <MappingFragment StoreEntitySet="userAkun">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transaksis">
+            <EntityTypeMapping TypeName="bukuModel2.Transaksi">
+              <MappingFragment StoreEntitySet="Transaksi">
+                <ScalarProperty Name="tanggalTransaksi" ColumnName="tanggalTransaksi" />
+                <ScalarProperty Name="totalHarga" ColumnName="totalHarga" />
+                <ScalarProperty Name="jumlahBeli" ColumnName="jumlahBeli" />
+                <ScalarProperty Name="idBuku" ColumnName="idBuku" />
+                <ScalarProperty Name="idTransaksi" ColumnName="idTransaksi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

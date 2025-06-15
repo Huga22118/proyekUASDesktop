@@ -1,5 +1,7 @@
 .vs/*
 bukuHuga/.vs*/
+bukuHuga/obj/*
+bukuHuga/bin/*
 bukuHuga/bukuHuga/.vs*/
 bukuHuga/bukuHuga/obj/*
 bukuHuga/bukuHuga/bin/*
